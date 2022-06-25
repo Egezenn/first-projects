@@ -38,7 +38,6 @@ if score == 50:
 else:
     jimmy.write(f"You lost!", move=False, align="center", font=("Arial", 16, "normal"))
     
-
     not_guessed = [state for state in state_list if state not in answer_list]
     new_data = pandas.DataFrame(not_guessed)
     
