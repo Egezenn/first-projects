@@ -37,12 +37,11 @@ if score == 50:
     jimmy.write(f"You won with {len(answer_list)} guesses!", move=False, align="center", font=("Arial", 16, "normal"))
 else:
     jimmy.write(f"You lost!", move=False, align="center", font=("Arial", 16, "normal"))
+    
 
-    not_guessed = []
-    for state in state_list:
-        if state not in answer_list:
-            not_guessed.append(state)
+    not_guessed = [state for state in state_list if state not in answer_list]
     new_data = pandas.DataFrame(not_guessed)
+    
     new_data.to_csv("states_to_learn.csv")
 
 t.mainloop()
