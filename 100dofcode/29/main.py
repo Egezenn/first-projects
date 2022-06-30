@@ -9,12 +9,10 @@ def generate_pw():
                  "u", "v", "w", "x", "y", "z",
                  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
                  "U", "V", "W", "X", "Y", "Z",
-                 "!", "\'", "^", "+", "%", "&", "/", "(", ")", "=", "?", "_", "<", ">", "£", "#", "$", "{", "[",
-                 "]", "}", "@", "€", "~", ".", ":", ";", "\\",
+                 "!", "\'", "^", "-", "+", "%", "&", "/", "(", ")", "=", "?", "_", "<", ">", "£", "#", "$", "{", "[",
+                 "]", "}", "@", "~", ".", ":", ";", "|", "\\",
                  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    # doesn't use characters such as " , because of csv
-    # do not load in UTF-8, instead load in Windows-1252 instead to see symbols such as €
-    # wait, does passwords use symbols like € though? hmmm...
+    # https://en.wikipedia.org/wiki/List_of_Special_Characters_for_Passwords
 
     password = ""
     for password_char in range(int(pw_length_spinbox.get()) + 1):  # "".join(list/tuple) seems interesting
