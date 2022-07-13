@@ -49,56 +49,54 @@ def mail(stockjson, newsjson, var_smtp_server, var_port, var_sender_email, var_p
     two_days_ago_closing = float(stockjson["Time Series (Daily)"][two_days_ago]["4. close"])
 
     news = f"""
-    {newsjson["articles"][0]["title"]}<br><br>
-    {newsjson["articles"][0]["url"]}<br>
-    description: {newsjson["articles"][0]["description"]}<br><br><br><br>
+    <ol>
+        <li> <h4>{newsjson["articles"][0]["title"]}</h4> </li> <br>
+            <ul> <li>{newsjson["articles"][0]["description"]} | <a href="{newsjson["articles"][0]["url"]}">link</a> </li> </ul> <br> <br>
     
-    {newsjson["articles"][1]["title"]}<br><br>
-    {newsjson["articles"][1]["url"]}<br>
-    description: {newsjson["articles"][1]["description"]}<br><br><br><br>
+        <li> <h4>{newsjson["articles"][1]["title"]}</h4> </li> <br>
+            <ul> <li>{newsjson["articles"][1]["description"]} | <a href="{newsjson["articles"][1]["url"]}">link</a> </li> </ul> <br> <br>
     
-    {newsjson["articles"][2]["title"]}<br><br>
-    {newsjson["articles"][2]["url"]}<br>
-    description: {newsjson["articles"][2]["description"]}"""
-
+        <li> <h4>{newsjson["articles"][2]["title"]}</h4> </li> <br>
+            <ul> <li>{newsjson["articles"][2]["description"]} | <a href="{newsjson["articles"][2]["url"]}">link</a> </li> </ul>
+    </ol>
+    """
     if two_days_ago_closing + 2 >= one_day_ago_closing >= two_days_ago_closing - 2:
         html = f"""\
                 <html>
-                  <body>
-                    <p>YOUR STOCK STAYED RELATIVELY THE SAME<br><br>
-                    CURRENT: ${round(one_day_ago_closing, 2)}<br><br><br>
-                    NEWS:<br><br>
+                    <body>
+                        <p> <br>
+                        <h1>YOUR STOCK STAYED RELATIVELY THE SAME</h1> <br>
+                        <h2>CURRENT: ${round(one_day_ago_closing, 2)}</h2> <br>
+                        <h3>NEWS:</h3> <br>
                         {news}
-                    </p>
-                  </body>
+                        </p>
+                    </body>
                 </html>
                 """
-
     elif one_day_ago_closing < two_days_ago_closing:
         html = f"""\
-        <html>
-          <body>
-            <p>YOUR STOCK WENT DOWN<br><br>
-            BY: ${round(one_day_ago_closing - two_days_ago_closing, 2)}<br>
-            CURRENT: ${round(one_day_ago_closing, 2)}<br><br><br>
-            NEWS:<br><br>
-                {news}
-            </p>
-          </body>
-        </html>
-        """
-
+                <html>
+                    <body>
+                        <p>
+                        <h1>YOUR STOCK WENT DOWN</h1> <br>
+                        <h2>BY: -${round(two_days_ago_closing - one_day_ago_closing, 2)} | CURRENT: ${round(one_day_ago_closing, 2)}</h2> <br>
+                        <h3>NEWS:</h3> <br>
+                        {news}
+                        </p>
+                    </body>
+                </html>
+                """
     else:
         html = f"""\
                 <html>
-                  <body>
-                    <p>YOUR STOCK WENT UP<br><br>
-                    BY: ${round(one_day_ago_closing - two_days_ago_closing, 2)}<br>
-                    CURRENT: ${round(one_day_ago_closing, 2)}<br><br><br>
-                    NEWS:<br><br>
+                    <body>
+                        <p>
+                        <h1>YOUR STOCK WENT DOWN</h1>
+                        <h2>BY: +${round(one_day_ago_closing - two_days_ago_closing, 2)} | CURRENT: ${round(one_day_ago_closing, 2)}</h2> <br>
+                        <h3>NEWS:</h3> <br>
                         {news}
-                    </p>
-                  </body>
+                        </p>
+                    </body>
                 </html>
                 """
     html = MIMEText(html, "html")
