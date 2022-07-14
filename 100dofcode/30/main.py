@@ -15,7 +15,7 @@ def generate_pw():
     # https://en.wikipedia.org/wiki/List_of_Special_Characters_for_Passwords
 
     password = ""
-    for password_char in range(int(pw_length_spinbox.get()) + 1):  # "".join(list/tuple) seems interesting
+    for password_char in range(int(pw_length_spinbox.get())):  # "".join(list/tuple) seems interesting
         password += choice(char_list)
 
     pw_entry.insert(END, password)
