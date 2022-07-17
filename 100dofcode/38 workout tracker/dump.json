@@ -1,0 +1,16 @@
+{
+    "exercises": [
+        {
+            "user_input": "ran",
+            "duration_min": 18.65,
+            "nf_calories": 213.23,
+            "name": "running",
+        },
+        {
+            "user_input": "hiked",
+            "duration_min": 30,
+            "nf_calories": 273,
+            "name": "hiking",
+        }
+    ]
+}
